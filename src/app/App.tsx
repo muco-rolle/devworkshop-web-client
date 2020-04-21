@@ -4,6 +4,12 @@ import { Router, Switch } from "react-router-dom";
 import { getRoutes } from "routing";
 import { history } from "utils";
 
+// rsuite styles
+import "rsuite/lib/styles/index.less";
+
+// inter font
+import "typeface-inter";
+
 export const App = () => {
     const routes = getRoutes();
 
