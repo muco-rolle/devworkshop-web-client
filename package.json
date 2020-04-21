@@ -2,6 +2,13 @@
     "name": "dev-workshop-client",
     "version": "0.1.0",
     "private": true,
+    "scripts": {
+        "start": "BROWSER=chromium react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "commit": "npx git-cz"
+    },
     "dependencies": {
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.3.2",
@@ -15,11 +22,9 @@
         "react-scripts": "3.4.1",
         "typescript": "~3.7.2"
     },
-    "scripts": {
-        "start": "BROWSER=chromium react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
-        "eject": "react-scripts eject"
+    "devDependencies": {
+        "commitizen": "^4.0.4",
+        "cz-conventional-changelog": "3.1.0"
     },
     "eslintConfig": {
         "extends": "react-app"
@@ -36,7 +41,9 @@
             "last 1 safari version"
         ]
     },
-    "devDependencies": {
-        "commitizen": "^4.0.4"
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
     }
 }
