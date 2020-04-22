@@ -1,24 +1,53 @@
 import React from "react";
+import styled from "styled-components";
+import { DocumentHead, Logo } from "components";
+
+import introImage from "assets/images/intro.svg";
 import { Button } from "rsuite";
-import { DocumentHead } from "components";
+import { UIText } from "ui";
+
+const StyledHomeView = styled.div`
+    margin: 100px 150px 0 150px;
+
+    .intro {
+        display: flex;
+
+        img {
+            width: 600px;
+        }
+
+        &-text {
+            margin-right: 70px;
+
+            h1 {
+                margin: 30px 0 10px 0;
+            }
+
+            button {
+                margin-top: 30px;
+            }
+        }
+    }
+`;
 
 export const HomeView = () => {
     return (
-        <>
+        <StyledHomeView>
             <DocumentHead title="Home" />
-            <Button appearance="primary">Hello Button</Button>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Voluptates temporibus ullam, cumque maiores nemo ipsam sapiente
-                reiciendis, incidunt praesentium commodi nihil pariatur labore
-                dolore animi consequuntur provident harum. Commodi, fugit.
-            </p>
-            <h1>Home View</h1>
-            <h2>Home View</h2>
-            <h3>Home View</h3>
-            <h4>Home View</h4>
-            <h5>Home View</h5>
-            <h6>Home View</h6>
-        </>
+            <div className="intro">
+                <div className="intro-text">
+                    <Logo />
+                    <h1>Start making progress</h1>
+                    <UIText level={2}>Manage your projects easily</UIText>
+
+                    <Button appearance="primary" size="md">
+                        Get Started
+                    </Button>
+                </div>
+                <div className="intro-img">
+                    <img src={introImage} alt="People working illustration" />
+                </div>
+            </div>
+        </StyledHomeView>
     );
 };
