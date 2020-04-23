@@ -1,12 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import bgImage from "assets/images/auth.jpg";
+import { Logo } from "app/components";
 interface AuthLayoutProps {
     children: React.ReactChild;
 }
 
 const StyledAuthLayout = styled.div`
     height: 100vh;
+    width: 100vw;
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -19,20 +21,24 @@ const StyledAuthLayout = styled.div`
         url(${bgImage}); */
     .card {
         display: flex;
-        width: 600px;
+        min-width: 800px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
         &-form {
             background-color: white;
-            padding: 100px 30px;
-            border: 2px solid red;
+            padding: 50px 50px;
+
+            .logo {
+                display: inline-block;
+                margin-bottom: 20px;
+            }
         }
 
         &-image {
             background-image: url(${bgImage});
             background-size: cover;
+            background-position: center;
             width: 100%;
-            border: 2px solid black;
 
             img {
                 width: inherit;
@@ -46,7 +52,10 @@ export const AuthLayout = (props: AuthLayoutProps) => {
     return (
         <StyledAuthLayout>
             <div className="card">
-                <div className="card-form">{props.children}</div>
+                <div className="card-form">
+                    <Logo className="logo" />
+                    {props.children}
+                </div>
 
                 <div className="card-image"></div>
             </div>

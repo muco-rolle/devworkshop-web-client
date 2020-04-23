@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import React from "react";
 import { color } from "utils";
 
+interface LogoProps {
+    className?: string;
+}
+
 const StyledLogo = styled(Link)`
     font-size: 30px;
     font-weight: 800;
@@ -19,9 +23,9 @@ const StyledLogo = styled(Link)`
     }
 `;
 
-export const Logo = () => {
+export const Logo = (props: LogoProps) => {
     return (
-        <StyledLogo to="/">
+        <StyledLogo to="/" className={props.className}>
             dev-workshop <span>.</span>
         </StyledLogo>
     );
