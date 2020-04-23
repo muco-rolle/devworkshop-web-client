@@ -34,6 +34,9 @@ export const GlobalStyles = createGlobalStyle`
         }
     }
 
-    /* customization of rsuite typography */
+    /* customization of rsuite forms */
+    .rs-input {
+        border-radius: 3px;
+    }
  
 `;

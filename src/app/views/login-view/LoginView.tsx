@@ -1,11 +1,15 @@
 import React from "react";
 import { DocumentHead } from "app/components";
+import { LoginForm } from "./components";
+import { AuthLayout } from "app/layouts";
 
 export const LoginView = () => {
     return (
         <>
             <DocumentHead title="Login" />
-            <h1>Login View</h1>
+            <AuthLayout>
+                <LoginForm />
+            </AuthLayout>
         </>
     );
 };
