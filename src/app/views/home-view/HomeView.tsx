@@ -5,6 +5,8 @@ import { DocumentHead, Logo } from "app/components";
 import introImage from "assets/images/intro.svg";
 import { Button } from "rsuite";
 import { UIText } from "app/ui";
+import { Link } from "react-router-dom";
+import { routes } from "config";
 
 const StyledHomeView = styled.div`
     margin: 100px 150px 0 150px;
@@ -24,7 +26,7 @@ const StyledHomeView = styled.div`
                 letter-spacing: 2px;
             }
 
-            button {
+            a {
                 margin-top: 30px;
             }
         }
@@ -41,7 +43,12 @@ export const HomeView = () => {
                     <h1>Start making progress</h1>
                     <UIText level={2}>Manage your projects easily</UIText>
 
-                    <Button appearance="primary" size="md">
+                    <Button
+                        appearance="primary"
+                        size="md"
+                        to={routes.signup}
+                        componentClass={Link}
+                    >
                         Get Started
                     </Button>
                 </div>
