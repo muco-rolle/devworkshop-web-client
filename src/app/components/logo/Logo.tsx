@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import React from "react";
+import { color } from "utils";
 
 const StyledLogo = styled(Link)`
     font-size: 30px;
     font-weight: 800;
-    color: #094067;
+    color: ${color("heading5")};
     font-family: "Grand Hotel", cursive;
 
     &:hover {
@@ -14,7 +15,7 @@ const StyledLogo = styled(Link)`
 
     span {
         font-size: 40px;
-        color: #3da9fc;
+        color: ${color("primary5")};
     }
 `;
 

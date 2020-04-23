@@ -1,5 +1,5 @@
 import React from "react";
-import { DocumentHead } from "components";
+import { DocumentHead } from "app/components";
 
 export const ActivateAccountView = () => {
     return (

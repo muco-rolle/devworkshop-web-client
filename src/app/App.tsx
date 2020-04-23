@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Router, Switch } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
-import { getRoutes } from "routing";
+import { getRoutes } from "app/routing";
 import { history } from "utils";
-import { GlobalStyles } from "components";
+import { GlobalStyles } from "app/components";
+import { theme } from "theme";
 
 // rsuite styles
 import "rsuite/lib/styles/index.less";
@@ -15,11 +17,11 @@ export const App = () => {
     const routes = getRoutes();
 
     return (
-        <Fragment>
+        <ThemeProvider theme={theme}>
             <Router history={history}>
                 <GlobalStyles />
                 <Switch>{routes}</Switch>
             </Router>
-        </Fragment>
+        </ThemeProvider>
     );
 };

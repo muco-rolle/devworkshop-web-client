@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { DocumentHead, Logo } from "components";
+import { DocumentHead, Logo } from "app/components";
 
 import introImage from "assets/images/intro.svg";
 import { Button } from "rsuite";
-import { UIText } from "ui";
+import { UIText } from "app/ui";
 
 const StyledHomeView = styled.div`
     margin: 100px 150px 0 150px;
@@ -21,6 +21,7 @@ const StyledHomeView = styled.div`
 
             h1 {
                 margin: 30px 0 10px 0;
+                letter-spacing: 2px;
             }
 
             button {

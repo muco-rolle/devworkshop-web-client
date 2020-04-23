@@ -1,7 +1,12 @@
 import React, { Fragment } from "react";
 import { Route } from "react-router-dom";
 import { routes } from "config";
-import { HomeView, SignupView, LoginView, ActivateAccountView } from "views";
+import {
+    HomeView,
+    SignupView,
+    LoginView,
+    ActivateAccountView,
+} from "app/views";
 
 export const getRoutes = () => (
     <Fragment>
