@@ -25,6 +25,8 @@ export const SignupForm = () => {
             console.log(formError);
             return;
         }
+
+        console.log(formValue);
     };
 
     return (
