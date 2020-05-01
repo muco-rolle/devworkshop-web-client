@@ -1,10 +1,13 @@
 import React from "react";
 import { Form, Input, Button } from "rsuite";
 
-import { validationSchemas } from "config";
+import { validationSchemas, routes } from "config";
 import { FormField } from "app/components";
+import { useLoginMutation } from "app/graphql";
+import { redirectTo, storage, notify, formatError } from "utils";
 
 export const LoginForm = () => {
+    const [login, { loading }] = useLoginMutation();
     // TODO: add form types
     let form: any = null;
 
@@ -23,6 +26,32 @@ export const LoginForm = () => {
         if (!form!.check()) {
             console.log(formError);
             return;
+        }
+        try {
+            const response = await login({ variables: { ...formValue } });
+            if (response.data) {
+                const { token } = response.data.login;
+
+                const devworkshop = storage.get("devworkshop");
+                devworkshop.token = token;
+                storage.save(devworkshop);
+
+                notify({
+                    type: "success",
+                    title: `You're now connected.`,
+                    message: `Have fun with your project, build exciting things.`,
+                    duration: 20000,
+                });
+
+                redirectTo(routes.app);
+            }
+        } catch ({ message }) {
+            notify({
+                type: "danger",
+                title: `Login failed`,
+                message: formatError(message),
+                duration: 20000,
+            });
         }
     };
 
@@ -53,7 +82,13 @@ export const LoginForm = () => {
                 component={Input}
             />
 
-            <Button appearance="primary" block onClick={handleSubmit} size="md">
+            <Button
+                appearance="primary"
+                block
+                onClick={handleSubmit}
+                size="md"
+                loading={loading}
+            >
                 Login
             </Button>
         </Form>

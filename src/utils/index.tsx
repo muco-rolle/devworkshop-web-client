@@ -3,3 +3,4 @@ export * from "./theme";
 export * from "./notification";
 export * from "./storage";
 export * from "./apollo-client";
+export * from "./auth";

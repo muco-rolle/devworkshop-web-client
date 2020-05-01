@@ -20,7 +20,7 @@ import "typeface-inter";
 import { client } from "config";
 
 export const App = () => {
-    const routes = getRoutes();
+    const appRoutes = getRoutes();
 
     return (
         <ThemeProvider theme={theme}>
@@ -28,7 +28,7 @@ export const App = () => {
                 <Router history={history}>
                     <GlobalStyles />
                     <ReactNotification />
-                    <Switch>{routes}</Switch>
+                    <Switch>{appRoutes}</Switch>
                 </Router>
             </ApolloProvider>
         </ThemeProvider>

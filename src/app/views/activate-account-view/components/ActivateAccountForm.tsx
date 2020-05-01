@@ -49,7 +49,7 @@ export const ActivateAccountForm = () => {
                 notify({
                     type: "success",
                     title: `${username}'s account is activated.`,
-                    message: `Start building great staffs.`,
+                    message: `Have fun with your project, build exciting things.`,
                     duration: 20000,
                 });
 

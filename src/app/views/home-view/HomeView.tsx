@@ -5,8 +5,9 @@ import { DocumentHead, Logo } from "app/components";
 import introImage from "assets/images/intro.svg";
 import { Button } from "rsuite";
 import { UIText } from "app/ui";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { routes } from "config";
+import { isUserAuthenticated } from "utils";
 
 const StyledHomeView = styled.div`
     margin: 100px 150px 0 150px;
@@ -34,6 +35,13 @@ const StyledHomeView = styled.div`
 `;
 
 export const HomeView = () => {
+    const { authenticatedUser, expiredUser } = isUserAuthenticated();
+    if (authenticatedUser) {
+        return <Redirect to={routes.app} />;
+    } else if (expiredUser) {
+        return <Redirect to={routes.login} />;
+    }
+
     return (
         <StyledHomeView>
             <DocumentHead title="Home" />
