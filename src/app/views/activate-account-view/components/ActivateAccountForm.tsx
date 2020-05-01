@@ -1,10 +1,14 @@
 import React from "react";
 import { Form, Input, Button } from "rsuite";
 
-import { validationSchemas } from "config";
+import { validationSchemas, routes } from "config";
 import { FormField } from "app/components";
+import { useActivateAccountMutation } from "app/graphql";
+import { storage, notify, formatError, redirectTo } from "utils";
 
 export const ActivateAccountForm = () => {
+    const [activateAccount, { loading }] = useActivateAccountMutation();
+
     // TODO: add form types
     let form: any = null;
 
@@ -22,6 +26,42 @@ export const ActivateAccountForm = () => {
         if (!form!.check()) {
             console.log(formError);
             return;
+        }
+
+        try {
+            const response = await activateAccount({
+                variables: { ...formValue },
+            });
+
+            if (response.data) {
+                const {
+                    active,
+                    token,
+                    username,
+                } = response.data.activateAccount;
+
+                const devworkshop = storage.get("devworkshop");
+                devworkshop.active = active;
+                devworkshop.token = token;
+
+                storage.save(devworkshop);
+
+                notify({
+                    type: "success",
+                    title: `${username}'s account is activated.`,
+                    message: `Start building great staffs.`,
+                    duration: 20000,
+                });
+
+                redirectTo(routes.app);
+            }
+        } catch ({ message }) {
+            notify({
+                type: "danger",
+                title: `Activate Account Failure`,
+                message: formatError(message),
+                duration: 20000,
+            });
         }
     };
 
@@ -45,7 +85,13 @@ export const ActivateAccountForm = () => {
                 component={Input}
             />
 
-            <Button appearance="primary" block onClick={handleSubmit} size="md">
+            <Button
+                appearance="primary"
+                block
+                onClick={handleSubmit}
+                size="md"
+                loading={loading}
+            >
                 Activate Account
             </Button>
         </Form>
