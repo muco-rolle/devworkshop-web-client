@@ -6,7 +6,6 @@ import { ApolloLink } from "apollo-boost";
 import { onError } from "apollo-link-error";
 
 import { notify, storage } from "utils";
-import { GraphQLError } from "graphql";
 
 const GRAPHQL_URL = "http://localhost:4000/api";
 
@@ -27,26 +26,6 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
-    if (graphQLErrors) {
-        graphQLErrors.map((graphqlError: GraphQLError) => {
-            if ((graphqlError as any).path[0] === "signup") {
-                console.log("graphql error");
-
-                return notify({
-                    type: "danger",
-                    title: "Signup Failed.",
-                    message: graphqlError.message,
-                });
-            } else {
-                return notify({
-                    type: "danger",
-                    title: "Bad Request.",
-                    message: graphqlError.message,
-                });
-            }
-        });
-    }
-
     if (networkError) {
         notify({
             type: "danger",

@@ -163,7 +163,7 @@ export type SignupMutation = (
   { __typename?: 'Mutation' }
   & { signup: (
     { __typename?: 'UserType' }
-    & Pick<UserType, 'id' | 'username'>
+    & Pick<UserType, 'id' | 'username' | 'email' | 'active'>
   ) }
 );
 
@@ -173,6 +173,8 @@ export const SignupDocument = gql`
   signup(user: {username: $username, email: $email, password: $password}) {
     id
     username
+    email
+    active
   }
 }
     `;

@@ -1,10 +1,14 @@
 import React from "react";
 import { Form, Input, Button } from "rsuite";
 
-import { validationSchemas } from "config";
+import { validationSchemas, routes } from "config";
 import { FormField } from "app/components";
+import { useSignupMutation } from "app/graphql";
+import { notify, storage, redirectTo, formatError } from "utils";
 
 export const SignupForm = () => {
+    const [signup, { loading }] = useSignupMutation();
+
     // TODO: add form types
     let form: any = null;
 
@@ -26,7 +30,31 @@ export const SignupForm = () => {
             return;
         }
 
-        console.log(formValue);
+        try {
+            const response = await signup({ variables: { ...formValue } });
+
+            if (response.data) {
+                const { username, email, active } = response.data?.signup;
+
+                storage.save({ active });
+
+                notify({
+                    type: "success",
+                    title: `${username} Signed up successfully`,
+                    message: `Please check your inbox we sent you a validation code on ${email}.`,
+                    duration: 20000,
+                });
+
+                redirectTo(routes.activateAccount);
+            }
+        } catch ({ message }) {
+            notify({
+                type: "danger",
+                title: `Signup failure`,
+                message: formatError(message),
+                duration: 20000,
+            });
+        }
     };
 
     return (
@@ -63,7 +91,13 @@ export const SignupForm = () => {
                 component={Input}
             />
 
-            <Button appearance="primary" block onClick={handleSubmit} size="md">
+            <Button
+                appearance="primary"
+                block
+                onClick={handleSubmit}
+                size="md"
+                loading={loading}
+            >
                 Signup
             </Button>
         </Form>
