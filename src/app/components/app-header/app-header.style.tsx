@@ -6,9 +6,10 @@ export const StyledAppHeader = styled.header`
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.1);
     padding: 0 40px;
     height: 70px;
+    background-color: white;
 
     .logo {
         line-height: 70px;

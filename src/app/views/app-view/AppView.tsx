@@ -1,5 +1,5 @@
 import React from "react";
-import { DocumentHead, AppHeader } from "app/components";
+import { DocumentHead, AppHeader, Projects } from "app/components";
 import styled from "styled-components";
 
 const StyledAppView = styled.div`
@@ -12,6 +12,7 @@ export const AppView = () => {
         <StyledAppView>
             <DocumentHead title="Projects" />
             <AppHeader />
+            <Projects />
         </StyledAppView>
     );
 };
